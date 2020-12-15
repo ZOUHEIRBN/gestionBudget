@@ -1,0 +1,12 @@
+div.container{
+  display: flex;
+  flex-direction: column;
+}
+.panel{
+  margin: 3px;
+}
+@media (orientation: landscape) and (min-width: 1024px){
+  div.container{
+    flex-direction: row;
+  }
+}

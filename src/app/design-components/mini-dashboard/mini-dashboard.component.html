@@ -1,0 +1,39 @@
+<div class="container">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Statistiques</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions>
+    <mat-form-field appearance="fill">
+      <mat-label>Plot type</mat-label>
+      <mat-select [(ngModel)]="plotted_data" name="food">
+        <mat-option [value]="'Marchés'">
+          Marchés
+        </mat-option>
+        <mat-option [value]="'Caisse'">
+          Caisse
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button [matMenuTriggerFor]="addMenu">
+      <mat-icon>add</mat-icon> Ajouter
+    </button>
+    <mat-menu #addMenu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>dialpad</mat-icon>
+        <span>Marché</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>voicemail</mat-icon>
+        <span>Caisse</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>notifications_off</mat-icon>
+        <span>Charge directe marché</span>
+      </button>
+    </mat-menu>
+  </mat-card-actions>
+</div>
+<bar-chart *ngIf="plotted_data == 'Marchés'" [data]="data" [x_property]="'Framework'" [y_property]="'Stars'"></bar-chart>
