@@ -1,0 +1,21 @@
+form{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+form>*{
+  flex-grow: .5;
+}
+form>.example-full-width{
+  width: 100%;
+}
+@media (orientation: landscape) {
+  form{
+    flex-direction: row;
+  }
+  form>*{
+    flex-grow: 0.5;
+    width: 35%;
+    padding: 5px;
+  }
+}

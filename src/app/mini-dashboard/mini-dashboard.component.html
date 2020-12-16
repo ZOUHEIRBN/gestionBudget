@@ -21,12 +21,12 @@
       <mat-icon>add</mat-icon> Ajouter
     </button>
     <mat-menu #addMenu="matMenu">
-      <button mat-menu-item>
-        <mat-icon>dialpad</mat-icon>
+      <button mat-menu-item (click)="addMarketDialog()">
+        <mat-icon>domain</mat-icon>
         <span>Marché</span>
       </button>
-      <button mat-menu-item>
-        <mat-icon>voicemail</mat-icon>
+      <button mat-menu-item (click)="addFundDialog()">
+        <mat-icon>point_of_sale</mat-icon>
         <span>Caisse</span>
       </button>
       <button mat-menu-item>

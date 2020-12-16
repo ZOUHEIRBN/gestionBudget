@@ -1,0 +1,73 @@
+<form class="example-form">
+  <h2 class="example-full-width">
+    <mat-icon>point_of_sale</mat-icon>
+    Nouvelle caisse
+  </h2>
+
+  <mat-form-field>
+    <mat-label>Date de commencement</mat-label>
+    <input matInput [matDatepicker]="date_picker" required name="date" [(ngModel)]="fund.date">
+    <mat-datepicker-toggle matSuffix [for]="date_picker"></mat-datepicker-toggle>
+    <mat-datepicker #date_picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="">
+    <mat-label>Select an option</mat-label>
+    <mat-select [(value)]="fund.budget_type">
+      <mat-option value="Fonctionnement">Fonctionnement</mat-option>
+      <mat-option value="Investissement">Investissement</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Référence Marché</mat-label>
+    <input matInput placeholder="" name="market_ref" [(ngModel)]="fund.market_ref">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Rubrique</mat-label>
+    <input matInput placeholder="" name="rubric" [(ngModel)]="fund.rubric">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Compte comptable</mat-label>
+    <input type="number" matInput placeholder="" required name="accountant_no" [(ngModel)]="fund.accountant_no">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Opération</mat-label>
+    <textarea matInput placeholder="Ex. It makes me feel..." required name="operation" [(ngModel)]="fund.operation"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Private Security Atlanta</mat-label>
+    <input type="number" (change)="fund.setTotalSum()" matInput placeholder="" required name="PSA" [(ngModel)]="fund.psa">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Najd</mat-label>
+    <input type="number" (change)="fund.setTotalSum()" matInput placeholder="" required name="najd" [(ngModel)]="fund.najd">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Société d'aménagement</mat-label>
+    <input type="number" (change)="fund.setTotalSum()" matInput placeholder="" required name="planning_company" [(ngModel)]="fund.planning_company">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Direction des études (Holding)</mat-label>
+    <input type="number" (change)="fund.setTotalSum()" matInput placeholder="" required name="holding" [(ngModel)]="fund.holding">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Montant total</mat-label>
+    <input type="number" disabled matInput placeholder="" required name="total_sum" [value]="fund.total_sum" [(ngModel)]="fund.total_sum">
+  </mat-form-field>
+
+  <mat-card-actions class="example-full-width">
+    <button mat-raised-button>
+      <mat-icon>done</mat-icon>
+      Valider
+    </button>
+  </mat-card-actions>
+</form>

@@ -42,6 +42,8 @@ import { ToolbarComponent } from './design-components/toolbar/toolbar.component'
 import { HomepageComponent } from './homepage/homepage.component';
 import { BarComponent } from './design-components/charts/bar/bar.component';
 import { MiniDashboardComponent } from './mini-dashboard/mini-dashboard.component';
+import { AddMarketFormComponent } from './form-components/add-market-form/add-market-form.component';
+import { AddFundFormComponent } from './form-components/add-fund-form/add-fund-form.component';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { MiniDashboardComponent } from './mini-dashboard/mini-dashboard.componen
     ToolbarComponent,
     HomepageComponent,
     BarComponent,
-    MiniDashboardComponent
+    MiniDashboardComponent,
+    AddMarketFormComponent,
+    AddFundFormComponent
   ],
   imports: [
     BrowserModule,
