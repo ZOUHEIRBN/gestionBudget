@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class ToolbarComponent implements OnInit {
   @Output() drawerEvent = new EventEmitter();
   @Input() connected;
+  search_value = ''
   constructor() { }
 
   ngOnInit(): void {

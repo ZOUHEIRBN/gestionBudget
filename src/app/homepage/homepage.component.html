@@ -1,21 +1,60 @@
 <div class="container">
 
-  <mat-card class="panel">
-    <mini-dashboard></mini-dashboard>
+  <mat-card class="panel stretch">
+    <div class="container">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Statistiques</mat-card-title>
+        <mat-card-subtitle>31/12/2020</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+        <mat-form-field appearance="fill">
+          <mat-label>Plot type</mat-label>
+          <mat-select [(ngModel)]="plotted_data" name="food">
+            <mat-option [value]="'Marchés'">
+              Marchés
+            </mat-option>
+            <mat-option [value]="'Caisse'">
+              Caisse
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button [matMenuTriggerFor]="addMenu">
+          <mat-icon>add</mat-icon> Ajouter
+        </button>
+        <mat-menu #addMenu="matMenu">
+          <button mat-menu-item (click)="addMarketDialog()">
+            <mat-icon>domain</mat-icon>
+            <span>Marché</span>
+          </button>
+          <button mat-menu-item (click)="addFundDialog()">
+            <mat-icon>point_of_sale</mat-icon>
+            <span>Caisse</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>notifications_off</mat-icon>
+            <span>Charge directe marché</span>
+          </button>
+        </mat-menu>
+      </mat-card-actions>
+    </div>
+    <mini-dashboard [plotted_data]="plotted_data" [data]="data"></mini-dashboard>
   </mat-card>
 
-  <div class="panel">
+  <div class="panel stretch">
+    <mat-card-title>Derniers rapports</mat-card-title>
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let i of [1, 2]" hideToggle>
+      <mat-expansion-panel *ngFor="let i of [13, 20]" hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            This is the expansion title
+            Bilan du {{i}}/12/2020
           </mat-panel-title>
           <mat-panel-description>
-            This is a summary of the content
+            &nbsp;
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p>This is the primary content of the panel.</p>
+        <button mat-flat-button>Rapport marchés</button>
       </mat-expansion-panel>
 
     </mat-accordion>

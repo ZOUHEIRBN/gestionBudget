@@ -6,6 +6,13 @@ export const environment = {
   production: false
 };
 
+export const SQL_CONFIG = {
+  user: 'root',
+  password: 'zouheir6',
+  server: 'localhost', // You can use 'localhost\\instance' to connect to named instance
+  database: 'gestion_budget',
+}
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

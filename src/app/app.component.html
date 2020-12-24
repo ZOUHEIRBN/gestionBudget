@@ -1,7 +1,23 @@
 <toolbar (drawerEvent)="menuDrawer.toggle()" [connected]="true"></toolbar>
 <mat-drawer-container class="example-container" [hasBackdrop]="true">
   <mat-drawer #menuDrawer mode="Side">
-    I'm a drawer
+    <button mat-button class="full-width" [routerLink]="'/'">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+
+    <button mat-button class="full-width" [routerLink]="'/markets'">
+      <mat-icon>done</mat-icon>
+      <span>Markets</span>
+
+    </button>
+
+    <button mat-button class="full-width">
+      <mat-icon>done</mat-icon>
+      <span>Funds</span>
+
+    </button>
+
   </mat-drawer>
   <mat-drawer-content>
       <router-outlet></router-outlet>

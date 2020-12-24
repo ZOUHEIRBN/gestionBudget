@@ -1,4 +1,15 @@
 <mat-toolbar color="primary">
-  <button mat-raised-button (click)="drawerEvent.emit()">Toggle drawer</button>
+  <button mat-button (click)="drawerEvent.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div class="stretch">
+    <mat-form-field class="full-width">
+      <mat-label>Search</mat-label>
+      <input type="text" [(ngModel)]="search_value" matInput placeholder="Tapez votre recherche ici">
+      <button mat-button *ngIf="search_value" matSuffix mat-icon-button aria-label="Clear" (click)="search_value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
   <button mat-raised-button *ngIf="connected">Hello</button>
 </mat-toolbar>

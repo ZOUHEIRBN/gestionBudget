@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,6 +35,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRippleModule, MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
 
@@ -44,6 +47,10 @@ import { BarComponent } from './design-components/charts/bar/bar.component';
 import { MiniDashboardComponent } from './mini-dashboard/mini-dashboard.component';
 import { AddMarketFormComponent } from './form-components/add-market-form/add-market-form.component';
 import { AddFundFormComponent } from './form-components/add-fund-form/add-fund-form.component';
+import { FundListComponent } from './lists/fund-list/fund-list.component';
+import { MarketListComponent } from './lists/market-list/market-list.component';
+import { PieComponent } from './design-components/charts/pie/pie.component';
+
 
 
 @NgModule({
@@ -54,9 +61,13 @@ import { AddFundFormComponent } from './form-components/add-fund-form/add-fund-f
     BarComponent,
     MiniDashboardComponent,
     AddMarketFormComponent,
-    AddFundFormComponent
+    AddFundFormComponent,
+    FundListComponent,
+    MarketListComponent,
+    PieComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     RouterModule,
@@ -90,6 +101,8 @@ import { AddFundFormComponent } from './form-components/add-fund-form/add-fund-f
     MatDialogModule,
     MatBottomSheetModule,
     MatSnackBarModule,
+    MatPaginatorModule,
+    MatTableModule,
     MatProgressSpinnerModule,
     MatProgressBarModule
   ],
