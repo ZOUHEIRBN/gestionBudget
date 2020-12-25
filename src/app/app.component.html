@@ -1,22 +1,39 @@
 <toolbar (drawerEvent)="menuDrawer.toggle()" [connected]="true"></toolbar>
 <mat-drawer-container class="example-container" [hasBackdrop]="true">
   <mat-drawer #menuDrawer mode="Side">
-    <button mat-button class="full-width" [routerLink]="'/'">
-      <mat-icon>home</mat-icon>
-      <span>Home</span>
-    </button>
+    <mat-selection-list *ngIf="true" [multiple]="false">
+      <mat-divider></mat-divider>
+      <mat-list-option [routerLink]="'/'">
+        <a matLine>
+          <button mat-icon-button>
+            <mat-icon>home</mat-icon>
+          </button>
+          Home
+        </a>
 
-    <button mat-button class="full-width" [routerLink]="'/markets'">
-      <mat-icon>done</mat-icon>
-      <span>Markets</span>
+      </mat-list-option>
 
-    </button>
+      <mat-list-option [routerLink]="'/markets'">
+        <a matLine>
+          <button mat-icon-button>
+            <mat-icon>home</mat-icon>
+          </button>
+          Markets
+        </a>
+      </mat-list-option>
 
-    <button mat-button class="full-width">
-      <mat-icon>done</mat-icon>
-      <span>Funds</span>
+      <mat-list-option [routerLink]="'/funds'">
+        <a matLine>
+          <button mat-icon-button>
+            <mat-icon>home</mat-icon>
+          </button>
+          Funds
+        </a>
 
-    </button>
+      </mat-list-option>
+
+    </mat-selection-list>
+
 
   </mat-drawer>
   <mat-drawer-content>

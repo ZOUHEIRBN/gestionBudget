@@ -60,6 +60,11 @@
   </mat-form-field>
 
   <mat-form-field>
+    <mat-label>XY Conseil</mat-label>
+    <input type="number" (change)="fund.setTotalSum()" matInput placeholder="" required name="xy_advisor" [(ngModel)]="fund.xy_advisor">
+  </mat-form-field>
+
+  <mat-form-field>
     <mat-label>Montant total</mat-label>
     <input type="number" disabled matInput placeholder="" required name="total_sum" [value]="fund.total_sum" [(ngModel)]="fund.total_sum">
   </mat-form-field>

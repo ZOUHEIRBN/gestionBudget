@@ -1,4 +1,5 @@
 export class Market{
+  id?
   owner;
   mo;
   market_no;
@@ -19,7 +20,13 @@ export class Market{
   }
   fillFromJSON(jsonObj) {
       for (var propName in jsonObj) {
+        if(['begin_date', 'end_date'].includes(propName)){
+          this[propName] = new Date(jsonObj[propName])
+        }
+        else{
           this[propName] = jsonObj[propName]
+        }
+
       }
   }
   generate_random_str(len = 5){

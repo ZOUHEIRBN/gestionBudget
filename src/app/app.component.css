@@ -1,0 +1,6 @@
+mat-selection-list{
+  width: 33vw;
+}
+mat-drawer-content{
+  min-height: calc(100vh - 64px);
+}

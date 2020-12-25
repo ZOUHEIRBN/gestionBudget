@@ -1,8 +1,10 @@
 import { OnInit, AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Market } from 'src/app/businessObjects/Market';
+import { AddMarketFormComponent } from 'src/app/form-components/add-market-form/add-market-form.component';
 import { MarketService } from 'src/app/services/market.service';
 
 @Component({
@@ -11,13 +13,15 @@ import { MarketService } from 'src/app/services/market.service';
   styleUrls: ['./market-list.component.css']
 })
 export class MarketListComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['owner', 'mo', 'market_no', 'object'];
+  pgSizeOptions = [5, 10, 25, 100]
+  displayedColumns: string[] = ['owner', 'mo', 'market_no', 'actions'];
+  // , 'object', 'begin_date','deadline',  'end_date', 'def_caution', 'total_sum', 'trimester_sum', 'agents_number'
   dataSource: MatTableDataSource<Market>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _marketService:MarketService) {}
+  constructor(private _marketService:MarketService, private _dialog:MatDialog) {}
 
   ngAfterViewInit(): void {
 
@@ -31,6 +35,8 @@ export class MarketListComponent implements OnInit, AfterViewInit {
         m.fillFromJSON(e)
         data_array.push(m);
       })
+      this.pgSizeOptions = this.pgSizeOptions.filter(n => n < data_array.length)
+      this.pgSizeOptions.push(data_array.length)
       this.dataSource = new MatTableDataSource(data_array);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -44,5 +50,12 @@ export class MarketListComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  view(market){
+    this._dialog.open(AddMarketFormComponent, {
+      width: '90vw',
+      maxHeight: '90vh',
+      data: {market: market, readonly:true}
+    })
   }
 }

@@ -14,3 +14,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   min-width: 100px;
   min-height: 100px;
 }
+table[mat-table] {
+  width: 100%;
+}

@@ -9,9 +9,21 @@ export class Fund{
   psa:number;
   najd:number;
   planning_company:number;
+  xy_advisor:number;
   holding:number;
   total_sum:number = 0;
 
+  fillFromJSON(jsonObj) {
+    for (var propName in jsonObj) {
+      if(['begin_date', 'end_date'].includes(propName)){
+        this[propName] = new Date(jsonObj[propName])
+      }
+      else{
+        this[propName] = jsonObj[propName]
+      }
+
+    }
+}
   setTotalSum(){
     let sum = 0;
     if(this.psa){
