@@ -13,10 +13,7 @@ export class Market{
   agents_number:number;
 
   constructor(){
-    this.owner = this.generate_random_str();
-    this.mo = this.generate_random_str(10);
-    this.market_no = this.generate_random_str(10);
-    this.object = this.generate_random_str(64);
+    this.id = this.generate_random_str(64);
   }
   fillFromJSON(jsonObj) {
       for (var propName in jsonObj) {

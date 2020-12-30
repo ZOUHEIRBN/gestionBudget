@@ -52,10 +52,13 @@ export class MarketListComponent implements OnInit, AfterViewInit {
     }
   }
   view(market){
-    this._dialog.open(AddMarketFormComponent, {
+    const dialog = this._dialog.open(AddMarketFormComponent, {
       width: '90vw',
       maxHeight: '90vh',
       data: {market: market, readonly:true}
+    })
+    dialog.componentInstance.operation_success.subscribe(event => {
+      console.log(event)
     })
   }
 }

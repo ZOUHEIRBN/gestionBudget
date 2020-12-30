@@ -1,12 +1,12 @@
 <mat-tab-group>
-  <mat-tab *ngFor="let ds of dataSources" [label]="ds.key">
+  <mat-tab *ngFor="let ds of dataSource" [label]="ds.date">
     <mat-form-field  class="full-width">
       <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event, ds.dataSource)" placeholder="Ex. Mia" #filterinput>
+      <input matInput (keyup)="applyFilter($event, ds.funds)" placeholder="Ex. Mia" #filterinput>
     </mat-form-field>
 
     <div *ngIf="true" class="mat-elevation-z8">
-      <table mat-table [dataSource]="ds.dataSource" matSort>
+      <table mat-table [dataSource]="ds.funds" matSort>
 
         <!-- ID Column -->
         <ng-container matColumnDef="budget_type">

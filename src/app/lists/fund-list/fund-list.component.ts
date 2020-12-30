@@ -3,8 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Fund } from 'src/app/businessObjects/Fund';
+import { Fund, FundList } from 'src/app/businessObjects/Fund';
 import { Market } from 'src/app/businessObjects/Market';
+import { AddFundFormComponent } from 'src/app/form-components/add-fund-form/add-fund-form.component';
 import { AddMarketFormComponent } from 'src/app/form-components/add-market-form/add-market-form.component';
 import { FundService } from 'src/app/services/fund.service';
 import { MarketService } from 'src/app/services/market.service';
@@ -17,7 +18,7 @@ import { MarketService } from 'src/app/services/market.service';
 export class FundListComponent implements OnInit {
   pgSizeOptions = [5, 10, 25, 100]
   displayedColumns: string[] = ['budget_type', 'total_sum', 'actions'];
-  dataSources = [];
+  dataSource = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -26,19 +27,18 @@ export class FundListComponent implements OnInit {
 
   ngOnInit(): void {
     this._fundService.getFunds().subscribe((response:any[]) => {
-      for(let key in response){
-        let data = []
-        response[key].forEach(element => {
-          let f = new Fund()
-          f.fillFromJSON(element)
-          data.push(f)
-        });
-        let ds = new MatTableDataSource<Fund>(data)
-        ds.paginator = this.paginator;
-        ds.sort = this.sort;
-        this.dataSources.push({key: key, dataSource: ds});
+      for(let r of response){
+        let funds = []
+        for(let f of r['funds']){
+          let fund = new Fund()
+          fund.fillFromJSON(f)
+          funds.push(fund)
+        }
+        let fundlist = {date: r.date, funds:funds}
+        this.dataSource.push(<FundList>fundlist)
       }
-      console.log(this.dataSources)
+      console.log(this.dataSource)
+
 
     })
   }
@@ -52,10 +52,10 @@ export class FundListComponent implements OnInit {
     }
   }
   view(fund){
-    this._dialog.open(AddMarketFormComponent, {
+    this._dialog.open(AddFundFormComponent, {
       width: '90vw',
       maxHeight: '90vh',
-      data: {market: fund, readonly:true}
+      data: {fund: fund, readonly:true}
     })
   }
 

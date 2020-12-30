@@ -59,11 +59,11 @@
   </mat-form-field>
 
   <mat-card-actions class="example-full-width">
-    <button *ngIf="!readonly" mat-raised-button>
+    <button *ngIf="!readonly" (click)="addMarket()" mat-raised-button>
       <mat-icon>done</mat-icon>
       Valider
     </button>
-    <button *ngIf="readonly" mat-raised-button color="warn">
+    <button *ngIf="readonly" (click)="delMarket()" mat-raised-button color="warn">
       <mat-icon>delete</mat-icon>
       Supprimer
     </button>
