@@ -14,7 +14,7 @@ export class Fund{
   holding:number;
   total_sum:number = 0;
   constructor(){
-    this.id = this.generate_random_str(64);
+    //this.id = this.generate_random_str(64);
   }
 
   generate_random_str(len = 5){
@@ -56,13 +56,14 @@ export class Fund{
 }
 
 export class FundList{
-  id
+  id?
   date:Date
   funds:Fund[]
 
   constructor(){ }
 
   fillFromJSON(jsonObj){
+    this.id = jsonObj['id']
     this.date = new Date(jsonObj['date'])
     this.funds = []
     for(let i=0; i<jsonObj['funds']; i++){

@@ -1,69 +1,73 @@
 <form class="example-form">
   <h2 class="example-full-width">
     <mat-icon>domain</mat-icon>
-    {{ readonly?'Aperçu du marché':'Nouveau marché'}}
+    {{ mode == 'readonly'?'Aperçu du marché':'Nouveau marché'}}
   </h2>
 
   <mat-form-field>
     <mat-label>MO</mat-label>
-    <input matInput [disabled]="readonly" placeholder="MO" required name="mo" [(ngModel)]="market.mo">
+    <input matInput [disabled]="mode == 'readonly'" placeholder="MO" required name="mo" [(ngModel)]="market.mo">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Marché N°</mat-label>
-    <input matInput [disabled]="readonly" placeholder="Ex: 01/2018" required name="market_no" [(ngModel)]="market.market_no">
+    <input matInput [disabled]="mode == 'readonly'" placeholder="Ex: 01/2018" required name="market_no" [(ngModel)]="market.market_no">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Objet</mat-label>
-    <textarea matInput [disabled]="readonly" placeholder="Ex. It makes me feel..." required name="object" [(ngModel)]="market.object"></textarea>
+    <textarea matInput [disabled]="mode == 'readonly'" placeholder="Ex. It makes me feel..." required name="object" [(ngModel)]="market.object"></textarea>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Date de commencement</mat-label>
-    <input matInput [disabled]="readonly" [matDatepicker]="begin_date_picker" required name="begin_date" [(ngModel)]="market.begin_date">
+    <input matInput [disabled]="mode == 'readonly'" [matDatepicker]="begin_date_picker" required name="begin_date" [(ngModel)]="market.begin_date">
     <mat-datepicker-toggle matSuffix [for]="begin_date_picker"></mat-datepicker-toggle>
     <mat-datepicker #begin_date_picker></mat-datepicker>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Délai</mat-label>
-    <input matInput [disabled]="readonly" placeholder="Ex: 3 ans" required name="deadline" [(ngModel)]="market.deadline">
+    <input matInput [disabled]="mode == 'readonly'" placeholder="Ex: 3 ans" required name="deadline" [(ngModel)]="market.deadline">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Date de fin</mat-label>
-    <input matInput [disabled]="readonly" [matDatepicker]="end_date_picker" required name="end_date" [(ngModel)]="market.end_date">
+    <input matInput [disabled]="mode == 'readonly'" [matDatepicker]="end_date_picker" required name="end_date" [(ngModel)]="market.end_date">
     <mat-datepicker-toggle matSuffix [for]="end_date_picker"></mat-datepicker-toggle>
     <mat-datepicker #end_date_picker></mat-datepicker>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Caution définitive</mat-label>
-    <input type="number" matInput [disabled]="readonly" placeholder="" required name="def_caution" [(ngModel)]="market.def_caution">
+    <input type="number" matInput [disabled]="mode == 'readonly'" placeholder="" required name="def_caution" [(ngModel)]="market.def_caution">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Montant total</mat-label>
-    <input type="number" matInput [disabled]="readonly" placeholder="" required name="total_sum" [(ngModel)]="market.total_sum">
+    <input type="number" matInput [disabled]="mode == 'readonly'" placeholder="" required name="total_sum" [(ngModel)]="market.total_sum">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Montant trimestriel/Facture</mat-label>
-    <input type="number" matInput [disabled]="readonly" placeholder="" required name="trimester_sum" [(ngModel)]="market.trimester_sum">
+    <input type="number" matInput [disabled]="mode == 'readonly'" placeholder="" required name="trimester_sum" [(ngModel)]="market.trimester_sum">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Nombre des agents</mat-label>
-    <input type="number" matInput [disabled]="readonly" value="0" required name="agents_number" [(ngModel)]="market.agents_number">
+    <input type="number" matInput [disabled]="mode == 'readonly'" value="0" required name="agents_number" [(ngModel)]="market.agents_number">
   </mat-form-field>
 
   <mat-card-actions class="example-full-width">
-    <button *ngIf="!readonly" (click)="addMarket()" mat-raised-button>
+    <button *ngIf="mode == 'create'" (click)="addMarket()" mat-raised-button>
       <mat-icon>done</mat-icon>
       Valider
     </button>
-    <button *ngIf="readonly" (click)="delMarket()" mat-raised-button color="warn">
+    <button *ngIf="mode == 'edit'" (click)="editMarket()" mat-raised-button>
+      <mat-icon>done</mat-icon>
+      Modifier
+    </button>
+    <button *ngIf="mode == 'readonly'" (click)="delMarket()" mat-raised-button color="warn">
       <mat-icon>delete</mat-icon>
       Supprimer
     </button>

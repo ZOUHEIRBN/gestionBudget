@@ -26,13 +26,19 @@ export class FundListComponent implements OnInit {
   constructor(private _fundService:FundService, private _dialog:MatDialog) {}
 
   ngOnInit(): void {
-    this._fundService.getFunds().subscribe((response:any[]) => {
+    this._fundService.getFunds().subscribe((response:any) => {
+      response = response['funds']
       for(let r of response){
         let funds = []
-        for(let f of r['funds']){
-          let fund = new Fund()
-          fund.fillFromJSON(f)
-          funds.push(fund)
+        if(r['entries']){
+          for(let f of r['entries']){
+            let jsonf = f
+            jsonf['date'] = r['date']
+
+            let fund = new Fund()
+            fund.fillFromJSON(jsonf)
+            funds.push(fund)
+          }
         }
         let fundlist = {date: r.date, funds:funds}
         this.dataSource.push(<FundList>fundlist)
@@ -55,8 +61,21 @@ export class FundListComponent implements OnInit {
     this._dialog.open(AddFundFormComponent, {
       width: '90vw',
       maxHeight: '90vh',
-      data: {fund: fund, readonly:true}
+      data: {fund: fund, mode:'readonly'}
     })
+  }
+  edit(fund){
+    this._dialog.open(AddFundFormComponent, {
+      width: '90vw',
+      maxHeight: '90vh',
+      data: {fund: fund, mode:'edit'}
+    })
+  }
+  del(ds, fund){
+    this._fundService.deleteFund(fund).subscribe(_ =>{
+      ds.funds = ds.funds.filter(e => e !== fund)
+    })
+
   }
 
 }

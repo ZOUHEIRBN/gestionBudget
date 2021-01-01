@@ -29,7 +29,8 @@ export class MarketListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     let data_array:Market[] = [];
-    this._marketService.getMarkets().subscribe((data:any[]) => {
+    this._marketService.getMarkets().subscribe((data:any) => {
+      data = data['markets']
       data.forEach(e => {
         let m = new Market()
         m.fillFromJSON(e)
@@ -55,10 +56,26 @@ export class MarketListComponent implements OnInit, AfterViewInit {
     const dialog = this._dialog.open(AddMarketFormComponent, {
       width: '90vw',
       maxHeight: '90vh',
-      data: {market: market, readonly:true}
+      data: {market: market, mode:'readonly'}
     })
     dialog.componentInstance.operation_success.subscribe(event => {
       console.log(event)
     })
+  }
+  edit(market){
+    const dialog = this._dialog.open(AddMarketFormComponent, {
+      width: '90vw',
+      maxHeight: '90vh',
+      data: {market: market, mode:'edit'}
+    })
+    dialog.componentInstance.operation_success.subscribe(event => {
+      console.log(event)
+    })
+  }
+  del(market){
+    this._marketService.deleteMarket(market).subscribe(_ =>{
+      //
+    })
+
   }
 }

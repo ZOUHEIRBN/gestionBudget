@@ -10,7 +10,7 @@ import { MarketService } from 'src/app/services/market.service';
 })
 export class AddMarketFormComponent implements OnInit {
   market:Market = new Market()
-  readonly = false;
+  mode = 'create';
   @Output() operation_success = new EventEmitter();
 
   constructor(private _marketService:MarketService, public dialogRef: MatDialogRef<any>,
@@ -22,8 +22,8 @@ export class AddMarketFormComponent implements OnInit {
         this.market = this.data.market
       }
 
-      if(this.data.readonly){
-        this.readonly = this.data.readonly
+      if(this.data.mode){
+        this.mode = this.data.mode
       }
     }
   }
@@ -34,7 +34,12 @@ export class AddMarketFormComponent implements OnInit {
       this.operation_success.emit({market: this.market, message: 'Added market successfully!'})
     })
   }
-
+  editMarket(){
+    this._marketService.editMarket(this.market).subscribe(result => {
+      console.log(result)
+      this.operation_success.emit({market: this.market, message: 'Edited market successfully!'})
+    })
+  }
   delMarket(){
     this._marketService.deleteMarket(this.market).subscribe(result => {
       console.log(result)

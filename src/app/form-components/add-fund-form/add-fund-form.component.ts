@@ -9,7 +9,7 @@ import { FundService } from 'src/app/services/fund.service';
   styleUrls: ['./add-fund-form.component.css']
 })
 export class AddFundFormComponent implements OnInit {
-  readonly = false
+  mode = 'create'
   fund:Fund = new Fund()
   operation_success = new EventEmitter()
   constructor(private _fundService:FundService, public dialogRef: MatDialogRef<any>,
@@ -22,8 +22,8 @@ export class AddFundFormComponent implements OnInit {
         this.fund = this.data.fund
       }
 
-      if(this.data.readonly){
-        this.readonly = this.data.readonly
+      if(this.data.mode){
+        this.mode = this.data.mode
       }
     }
     console.log(this.fund)
@@ -31,6 +31,13 @@ export class AddFundFormComponent implements OnInit {
 
   addFund(){
     this._fundService.addFund(this.fund).subscribe(result => {
+      console.log(result)
+      this.operation_success.emit({fund: this.fund, message: 'Added fund successfully!'})
+    })
+  }
+
+  editFund(){
+    this._fundService.editFund(this.fund).subscribe(result => {
       console.log(result)
       this.operation_success.emit({fund: this.fund, message: 'Added fund successfully!'})
     })

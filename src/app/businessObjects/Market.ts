@@ -13,7 +13,7 @@ export class Market{
   agents_number:number;
 
   constructor(){
-    this.id = this.generate_random_str(64);
+    //this.id = this.generate_random_str(64);
   }
   fillFromJSON(jsonObj) {
       for (var propName in jsonObj) {

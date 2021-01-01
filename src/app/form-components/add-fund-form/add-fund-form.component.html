@@ -6,14 +6,14 @@
 
   <mat-form-field>
     <mat-label>Date de commencement</mat-label>
-    <input matInput [disabled]="readonly" [matDatepicker]="date_picker" required name="date" [(ngModel)]="fund.date">
+    <input matInput [disabled]="mode == 'readonly'" [matDatepicker]="date_picker" required name="date" [(ngModel)]="fund.date">
     <mat-datepicker-toggle matSuffix [for]="date_picker"></mat-datepicker-toggle>
     <mat-datepicker #date_picker></mat-datepicker>
   </mat-form-field>
 
   <mat-form-field appearance="">
     <mat-label>Select an option</mat-label>
-    <mat-select [(value)]="fund.budget_type" [disabled]="readonly">
+    <mat-select [(value)]="fund.budget_type" [disabled]="mode == 'readonly'">
       <mat-option value="Fonctionnement">Fonctionnement</mat-option>
       <mat-option value="Investissement">Investissement</mat-option>
     </mat-select>
@@ -21,60 +21,64 @@
 
   <mat-form-field>
     <mat-label>Référence Marché</mat-label>
-    <input matInput [disabled]="readonly" placeholder="" name="market_ref" [(ngModel)]="fund.market_ref">
+    <input matInput [disabled]="mode == 'readonly'" placeholder="" name="market_ref" [(ngModel)]="fund.market_ref">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Rubrique</mat-label>
-    <input matInput [disabled]="readonly" placeholder="" name="rubric" [(ngModel)]="fund.rubric">
+    <input matInput [disabled]="mode == 'readonly'" placeholder="" name="rubric" [(ngModel)]="fund.rubric">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Compte comptable</mat-label>
-    <input type="number" matInput [disabled]="readonly" placeholder="" required name="accountant_no" [(ngModel)]="fund.accountant_no">
+    <input type="number" matInput [disabled]="mode == 'readonly'" placeholder="" required name="accountant_no" [(ngModel)]="fund.accountant_no">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Opération</mat-label>
-    <textarea matInput [disabled]="readonly" placeholder="Ex. It makes me feel..." required name="operation" [(ngModel)]="fund.operation"></textarea>
+    <textarea matInput [disabled]="mode == 'readonly'" placeholder="Ex. It makes me feel..." required name="operation" [(ngModel)]="fund.operation"></textarea>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Private Security Atlanta</mat-label>
-    <input type="number" (change)="fund.setTotalSum()" matInput [disabled]="readonly" placeholder="" required name="PSA" [(ngModel)]="fund.psa">
+    <input type="number" (change)="fund.setTotalSum()" matInput [disabled]="mode == 'readonly'" placeholder="" required name="PSA" [(ngModel)]="fund.psa">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Najd</mat-label>
-    <input type="number" (change)="fund.setTotalSum()" matInput [disabled]="readonly" placeholder="" required name="najd" [(ngModel)]="fund.najd">
+    <input type="number" (change)="fund.setTotalSum()" matInput [disabled]="mode == 'readonly'" placeholder="" required name="najd" [(ngModel)]="fund.najd">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Société d'aménagement</mat-label>
-    <input type="number" (change)="fund.setTotalSum()" matInput [disabled]="readonly" placeholder="" required name="planning_company" [(ngModel)]="fund.planning_company">
+    <input type="number" (change)="fund.setTotalSum()" matInput [disabled]="mode == 'readonly'" placeholder="" required name="planning_company" [(ngModel)]="fund.planning_company">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Direction des études (Holding)</mat-label>
-    <input type="number" (change)="fund.setTotalSum()" matInput [disabled]="readonly" placeholder="" required name="holding" [(ngModel)]="fund.holding">
+    <input type="number" (change)="fund.setTotalSum()" matInput [disabled]="mode == 'readonly'" placeholder="" required name="holding" [(ngModel)]="fund.holding">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>XY Conseil</mat-label>
-    <input type="number" (change)="fund.setTotalSum()" matInput [disabled]="readonly" placeholder="" required name="xy_advisor" [(ngModel)]="fund.xy_advisor">
+    <input type="number" (change)="fund.setTotalSum()" matInput [disabled]="mode == 'readonly'" placeholder="" required name="xy_advisor" [(ngModel)]="fund.xy_advisor">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Montant total</mat-label>
-    <input type="number" disabled matInput [disabled]="readonly" placeholder="" required name="total_sum" [value]="fund.total_sum" [(ngModel)]="fund.total_sum">
+    <input type="number" disabled matInput [disabled]="mode == 'readonly'" placeholder="" required name="total_sum" [value]="fund.total_sum" [(ngModel)]="fund.total_sum">
   </mat-form-field>
 
   <mat-card-actions class="example-full-width">
-    <button *ngIf="!readonly" (click)="addFund()" mat-raised-button>
+    <button *ngIf="mode == 'create'" (click)="addFund()" mat-raised-button color="primary">
       <mat-icon>done</mat-icon>
       Valider
     </button>
-    <button *ngIf="readonly" (click)="delFund()" mat-raised-button color="warn">
+    <button *ngIf="mode == 'edit'" (click)="editFund()" mat-raised-button>
+      <mat-icon>done</mat-icon>
+      Modifier
+    </button>
+    <button *ngIf="mode == 'readonly'" (click)="delFund()" mat-raised-button color="warn">
       <mat-icon>delete</mat-icon>
       Supprimer
     </button>
