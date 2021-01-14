@@ -55,21 +55,3 @@ export class Fund{
 
 }
 
-export class FundList{
-  id?
-  date:Date
-  funds:Fund[]
-
-  constructor(){ }
-
-  fillFromJSON(jsonObj){
-    this.id = jsonObj['id']
-    this.date = new Date(jsonObj['date'])
-    this.funds = []
-    for(let i=0; i<jsonObj['funds']; i++){
-      let f = new Fund()
-      f.fillFromJSON(jsonObj['funds'][i])
-      this.funds.push(f)
-    }
-  }
-}

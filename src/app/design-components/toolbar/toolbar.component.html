@@ -11,5 +11,23 @@
       </button>
     </mat-form-field>
   </div>
-  <button mat-raised-button *ngIf="connected">Hello</button>
+  <button mat-flat-button color="{{ connected?'primary':'basic' }}" [matMenuTriggerFor]="userMenu">
+    <mat-icon *ngIf="connected">account_box</mat-icon>
+    <mat-icon *ngIf="!connected">account_circle</mat-icon>
+    {{ user_btn_text }}
+  </button>
+  <mat-menu #userMenu="matMenu">
+    <button *ngIf="!connected" mat-menu-item (click)="userConnect()">
+      <mat-icon>account_circle</mat-icon>
+      <span>Se connecter</span>
+    </button>
+    <button *ngIf="!connected" mat-menu-item (click)="userRegister()">
+      <mat-icon>add</mat-icon>
+      <span>S'inscrire</span>
+    </button>
+    <button *ngIf="connected" mat-menu-item (click)="userDisconnect()">
+      <mat-icon>clear</mat-icon>
+      <span>Se déconnecter</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>

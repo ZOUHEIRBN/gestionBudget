@@ -50,6 +50,8 @@ import { AddFundFormComponent } from './form-components/add-fund-form/add-fund-f
 import { FundListComponent } from './lists/fund-list/fund-list.component';
 import { MarketListComponent } from './lists/market-list/market-list.component';
 import { PieComponent } from './design-components/charts/pie/pie.component';
+import { UserConnectComponent } from './form-components/user-connect/user-connect.component';
+import { UserRegisterComponent } from './form-components/user-register/user-register.component';
 
 
 
@@ -64,7 +66,9 @@ import { PieComponent } from './design-components/charts/pie/pie.component';
     AddFundFormComponent,
     FundListComponent,
     MarketListComponent,
-    PieComponent
+    PieComponent,
+    UserConnectComponent,
+    UserRegisterComponent
   ],
   imports: [
     HttpClientModule,

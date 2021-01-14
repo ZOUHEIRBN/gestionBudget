@@ -1,0 +1,17 @@
+<mat-form-field class="full-width">
+  <mat-label>Login</mat-label>
+  <input type="text" matInput required name="password" [(ngModel)]="user.username">
+</mat-form-field>
+
+<mat-form-field class="full-width">
+  <mat-label>Mot de passe</mat-label>
+  <input type="password" matInput required name="password" [(ngModel)]="user.password">
+  <mat-error>ERROR !!!</mat-error>
+</mat-form-field>
+
+<mat-card-actions class="full-width">
+  <button (click)="register()" mat-raised-button color="primary">
+    <mat-icon>send</mat-icon>
+    S'inscrire
+  </button>
+</mat-card-actions>

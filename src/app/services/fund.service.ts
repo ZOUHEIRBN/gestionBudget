@@ -15,6 +15,12 @@ export class FundService {
   getFund(id){
     return this._httpClient.get('http://localhost:3000/funds/'+id)
   }
+  getFundsDateRange(from, to){
+    return this._httpClient.get('http://localhost:3000/funds/byDate', {params: {
+      from: from,
+      to: to
+    }})
+  }
   addFund(fund:Fund){
     return this._httpClient.post('http://localhost:3000/funds', fund)
   }

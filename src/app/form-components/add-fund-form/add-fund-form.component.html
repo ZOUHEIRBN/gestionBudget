@@ -5,7 +5,7 @@
   </h2>
 
   <mat-form-field>
-    <mat-label>Date de commencement</mat-label>
+    <mat-label>Date de dépense</mat-label>
     <input matInput [disabled]="mode == 'readonly'" [matDatepicker]="date_picker" required name="date" [(ngModel)]="fund.date">
     <mat-datepicker-toggle matSuffix [for]="date_picker"></mat-datepicker-toggle>
     <mat-datepicker #date_picker></mat-datepicker>
