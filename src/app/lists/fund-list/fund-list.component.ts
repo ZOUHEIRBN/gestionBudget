@@ -18,7 +18,7 @@ import { MarketService } from 'src/app/services/market.service';
 export class FundListComponent implements OnInit {
   pgSizeOptions = [5, 10, 25, 100]
   displayedColumns: string[] = ['budget_type', 'date', 'total_sum', 'actions'];
-  dataSource: MatTableDataSource<Fund>;
+  dataSource: MatTableDataSource<Fund> = new MatTableDataSource();
   fromDate = new Date();
   toDate = new Date();
 
@@ -54,12 +54,13 @@ export class FundListComponent implements OnInit {
       this.setData(data)
     })
   }
-  getTotalSum() {
+  setGlobalObject() {
+
     return this.dataSource.data.map(t => t.total_sum).reduce((acc, value) => acc + value, 0);
   }
   applyFilter(event: Event, ds) {
     const filterValue = (event.target as HTMLInputElement).value;
-    ds.filter = filterValue.trim().toLowerCase();
+    ds.filter = filterValue.trim().toLowerCase() + ' 0';
 
     if (ds.paginator) {
       ds.paginator.firstPage();
