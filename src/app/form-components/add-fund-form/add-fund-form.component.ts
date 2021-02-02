@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Fund } from 'src/app/businessObjects/Fund';
+import { Fund, PLAN_COMPTABLE } from 'src/app/businessObjects/Fund';
 import { FundService } from 'src/app/services/fund.service';
 
 @Component({
@@ -11,10 +11,15 @@ import { FundService } from 'src/app/services/fund.service';
 export class AddFundFormComponent implements OnInit {
   mode = 'create'
   fund:Fund = new Fund()
+  pc = PLAN_COMPTABLE
+  accno_list = []
   operation_success = new EventEmitter()
   constructor(private _fundService:FundService, public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data) { }
 
+    updateAccnoLists(){
+      this.accno_list = this.pc['rubrics'][this.fund.rubric]['account_no']
+    }
 
   ngOnInit(): void {
     if(this.data){

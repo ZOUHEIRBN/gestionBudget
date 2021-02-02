@@ -19,7 +19,7 @@ export class FundListComponent implements OnInit {
   pgSizeOptions = [5, 10, 25, 100]
   displayedColumns: string[] = ['budget_type', 'date', 'total_sum', 'actions'];
   dataSource: MatTableDataSource<Fund> = new MatTableDataSource();
-  fromDate = new Date();
+  fromDate = new Date("12/1/2020");
   toDate = new Date();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -30,7 +30,7 @@ export class FundListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this._fundService.getFunds().subscribe((data:any) => {
+    this._fundService.getFundsDateRange(this.fromDate, this.toDate).subscribe((data:any) => {
       this.setData(data)
     })
   }
@@ -49,18 +49,16 @@ export class FundListComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
   dateChanged(){
-    console.log("New dates: ", this.fromDate, " - ", this.toDate)
     this._fundService.getFundsDateRange(this.fromDate, this.toDate).subscribe(data => {
       this.setData(data)
     })
   }
   setGlobalObject() {
-
     return this.dataSource.data.map(t => t.total_sum).reduce((acc, value) => acc + value, 0);
   }
   applyFilter(event: Event, ds) {
     const filterValue = (event.target as HTMLInputElement).value;
-    ds.filter = filterValue.trim().toLowerCase() + ' 0';
+    ds.filter = filterValue.trim().toLowerCase();
 
     if (ds.paginator) {
       ds.paginator.firstPage();
@@ -78,7 +76,7 @@ export class FundListComponent implements OnInit {
     this._dialog.open(AddFundFormComponent, {
       width: '90vw',
       maxHeight: '90vh',
-      data: {fund: fund, mode:'readonly'}
+      data: {fund: fund, mode:'edit'}
     })
   }
   del(ds, fund){
